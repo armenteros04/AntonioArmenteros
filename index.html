@@ -131,6 +131,10 @@
   <div class="m-head">
     <h3 id="m-tfg-t" data-i18n="tfg.t">Trabajo de Fin de Grado</h3>
     <div class="m-actions">
+      <button type="button" class="m-jump" data-open="m-scene" data-i18n-aria="scene.aria" aria-label="Abrir escena interactiva">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>
+        <span data-i18n="scene.btn">Escena 3D</span>
+      </button>
       <button type="button" class="m-jump" data-gallery="m-tfg" data-i18n-aria="m.viewphotos" aria-label="Ver fotos">
         <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10.5" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg>
         <span data-i18n="m.viewphotos">Ver fotos</span>
@@ -165,6 +169,12 @@
       <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#lock"/></svg>
       <span data-i18n="m.private">Código privado</span>
     </p>
+
+    <h4 class="m-scene-t" data-i18n="scene.t">Escena interactiva</h4>
+    <div class="scene-cta">
+      <p data-i18n="scene.d">Recorrido en 3D por las etapas por las que pasa el vídeo en el backend: detección, seguimiento, roles, calibración y estadísticas.</p>
+      <button type="button" class="btn btn-red" data-open="m-scene"><span data-i18n="scene.open">Abrir escena interactiva</span></button>
+    </div>
 
     <h4 id="m-tfg-shots" class="m-shots-t" data-i18n="m.shots">Capturas</h4>
     <div class="shots">
@@ -206,6 +216,18 @@
       </figure>
     </div>
   </div>
+</dialog>
+
+<dialog class="modal scene-modal" id="m-scene" aria-labelledby="m-scene-t">
+  <div class="m-head">
+    <h3 id="m-scene-t" data-i18n="scene.t">Escena interactiva</h3>
+    <div class="m-actions">
+<button type="button" class="m-close" data-close data-i18n-aria="m.close" aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </div>
+  <iframe id="scene-frame" data-src="assets/escena/tfg-escena.html" title="Escena interactiva / Interactive scene" allow="fullscreen"></iframe>
 </dialog>
 
 <dialog class="lightbox" id="lb" data-i18n-aria="m.viewer" aria-label="Visor de imágenes">

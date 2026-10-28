@@ -33,13 +33,17 @@ const EN = {
   'tfg.n1': 'Frontend', 'tfg.u1': 'HTML and JavaScript. This is what the user sees.',
   'tfg.n2': 'Backend', 'tfg.u2': 'Python (FastAPI). Exposes a REST API and launches the analyses.',
   'tfg.n3': 'AI pipeline', 'tfg.u3': 'main.py. Does the heavy lifting on the video.',
-  'tfg.a4': 'Season data is stored in a SQLite database.'
+  'tfg.a4': 'Season data is stored in a SQLite database.',
+  'scene.t': 'Interactive scene',
+  'scene.d': 'A 3D walkthrough of the stages the video goes through in the backend: detection, tracking, roles, calibration and statistics.',
+  'scene.open': 'Open interactive scene', 'scene.aria': 'Open interactive scene',
+  'scene.btn': '3D scene', 'scene.newtab': 'New tab'
 };
 const meta = document.querySelector('meta[name=description]');
 const ES = { title: document.title, desc: meta.content, burger: 'Abrir menú' };
 const $$ = s => document.querySelectorAll(s);
 
-// guarda el texto original (español) de cada elemento
+// Guarda el texto original (español) de cada elemento.
 $$('[data-i18n]').forEach(e => ES[e.dataset.i18n] = e.textContent);
 $$('[data-i18n-alt]').forEach(e => ES[e.dataset.i18nAlt] = e.alt);
 $$('[data-i18n-aria]').forEach(e => ES[e.dataset.i18nAria] = e.getAttribute('aria-label'));
@@ -47,27 +51,40 @@ $$('[data-i18n-aria]').forEach(e => ES[e.dataset.i18nAria] = e.getAttribute('ari
 function setLang(l) {
   const d = l === 'en' ? EN : ES;
   document.documentElement.lang = l;
-  document.title = d.title; meta.content = d.desc;
-  $$('[data-i18n]').forEach(e => e.textContent = d[e.dataset.i18n]);
-  $$('[data-i18n-alt]').forEach(e => e.alt = d[e.dataset.i18nAlt]);
-  $$('[data-i18n-aria]').forEach(e => e.setAttribute('aria-label', d[e.dataset.i18nAria]));
+  document.title = d.title;
+  meta.content = d.desc;
+  $$('[data-i18n]').forEach(e => {
+    if (d[e.dataset.i18n] !== undefined) e.textContent = d[e.dataset.i18n];
+  });
+  $$('[data-i18n-alt]').forEach(e => {
+    if (d[e.dataset.i18nAlt] !== undefined) e.alt = d[e.dataset.i18nAlt];
+  });
+  $$('[data-i18n-aria]').forEach(e => {
+    if (d[e.dataset.i18nAria] !== undefined) e.setAttribute('aria-label', d[e.dataset.i18nAria]);
+  });
   $$('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === l));
   try { localStorage.setItem('lang', l); } catch (_) {}
 }
 $$('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
-let saved = null; try { saved = localStorage.getItem('lang'); } catch (_) {}
+let saved = null;
+try { saved = localStorage.getItem('lang'); } catch (_) {}
 setLang(saved || ((navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en'));
 
 // ---------- menú móvil ----------
 const burger = document.querySelector('.burger');
 const menu = document.getElementById('menu');
-burger.addEventListener('click', () => {
-  const open = menu.classList.toggle('open');
-  burger.setAttribute('aria-expanded', open);
-});
-menu.addEventListener('click', e => {
-  if (e.target.tagName === 'A') { menu.classList.remove('open'); burger.setAttribute('aria-expanded', false); }
-});
+if (burger && menu) {
+  burger.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  menu.addEventListener('click', e => {
+    if (e.target.tagName === 'A') {
+      menu.classList.remove('open');
+      burger.setAttribute('aria-expanded', false);
+    }
+  });
+}
 
 // ---------- filtros del portfolio ----------
 const buttons = $$('.filters button');
@@ -77,59 +94,98 @@ buttons.forEach(b => b.addEventListener('click', () => {
   cards.forEach(c => { c.hidden = b.dataset.f !== 'all' && c.dataset.c !== b.dataset.f; });
 }));
 
-document.getElementById('y').textContent = new Date().getFullYear();
+const year = document.getElementById('y');
+if (year) year.textContent = new Date().getFullYear();
 
 // ---------- ventana modal de proyectos ----------
 $$('[data-open]').forEach(c => c.addEventListener('click', () => {
   const m = document.getElementById(c.dataset.open);
-  m.showModal(); m.scrollTop = 0;
+  if (!m) return;
+  if (!m.open) m.showModal();
+  m.scrollTop = 0;
 }));
 $$('.modal').forEach(m => {
-  m.addEventListener('click', e => { if (e.target === m || e.target.closest('[data-close]')) m.close(); });
+  m.addEventListener('click', e => {
+    if (e.target === m || e.target.closest('[data-close]')) m.close();
+  });
 });
-// si falta una imagen, se oculta en lugar de mostrar el icono roto
+
+// Si falta una imagen, se oculta en lugar de mostrar el icono roto.
 $$('.thumb img, .shots img').forEach(i => i.addEventListener('error', () => {
-  const f = i.closest('figure'); f ? f.remove() : i.style.visibility = 'hidden';
+  const f = i.closest('figure');
+  if (f) f.remove();
+  else i.style.visibility = 'hidden';
 }));
 
 // ---------- visor de imágenes (ampliar capturas) ----------
 const lb = document.getElementById('lb');
-const lbImg = document.getElementById('lb-img');
-const lbCap = document.getElementById('lb-cap');
-const lbStage = lb.querySelector('.lb-stage');
-let shots = [], cur = 0;
+if (lb) {
+  const lbImg = document.getElementById('lb-img');
+  const lbCap = document.getElementById('lb-cap');
+  const lbStage = lb.querySelector('.lb-stage');
+  let shots = [], cur = 0;
 
-function showShot(i) {
-  cur = (i + shots.length) % shots.length;
-  const fig = shots[cur], im = fig.querySelector('img');
-  lbImg.src = im.currentSrc || im.src;
-  lbImg.alt = im.alt;
-  lbCap.textContent = fig.querySelector('figcaption').textContent + ' · ' + (cur + 1) + '/' + shots.length;
-  lbStage.classList.remove('zoomed');
-  lbStage.scrollTo(0, 0);
+  function showShot(i) {
+    if (!shots.length) return;
+    cur = (i + shots.length) % shots.length;
+    const fig = shots[cur], im = fig.querySelector('img');
+    lbImg.src = im.currentSrc || im.src;
+    lbImg.alt = im.alt;
+    lbCap.textContent = fig.querySelector('figcaption').textContent + ' · ' + (cur + 1) + '/' + shots.length;
+    lbStage.classList.remove('zoomed');
+    lbStage.scrollTo(0, 0);
+  }
+
+  function openViewer(figs, i) {
+    shots = figs;
+    if (!shots.length) return;
+    lb.classList.toggle('single', shots.length < 2);
+    lb.showModal();
+    showShot(i);
+  }
+
+  $$('[data-zoom]').forEach(b => b.addEventListener('click', () => {
+    const container = b.closest('.shots');
+    if (!container) return;
+    const figs = [...container.querySelectorAll('figure')];
+    openViewer(figs, figs.indexOf(b.closest('figure')));
+  }));
+
+  $$('[data-gallery]').forEach(b => b.addEventListener('click', () => {
+    const container = document.getElementById(b.dataset.gallery);
+    const figs = container ? [...container.querySelectorAll('.shots figure')] : [];
+    if (figs.length) openViewer(figs, 0);
+  }));
+
+  lb.querySelector('.lb-prev').addEventListener('click', () => showShot(cur - 1));
+  lb.querySelector('.lb-next').addEventListener('click', () => showShot(cur + 1));
+  lb.querySelector('.lb-close').addEventListener('click', () => lb.close());
+  lbImg.addEventListener('click', () => lbStage.classList.toggle('zoomed'));
+  lb.addEventListener('click', e => { if (e.target === lb || e.target === lbStage) lb.close(); });
+  lb.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') showShot(cur - 1);
+    if (e.key === 'ArrowRight') showShot(cur + 1);
+  });
 }
-function openViewer(figs, i) {
-  shots = figs;
-  lb.classList.toggle('single', shots.length < 2);
-  lb.showModal();
-  showShot(i);
+
+// ---------- escena interactiva del TFG (iframe en un modal propio) ----------
+const sceneM = document.getElementById('m-scene');
+const sceneF = document.getElementById('scene-frame');
+
+if (sceneM && sceneF) {
+  $$('[data-open="m-scene"]').forEach(b => b.addEventListener('click', () => {
+    // La escena se carga solo al abrirla y recibe el idioma activo de la web.
+    const url = sceneF.dataset.src + '?lang=' + document.documentElement.lang;
+    if (sceneF.getAttribute('src') !== url) {
+      sceneF.src = url;
+    }
+  }));
+
+  // Al cerrar se descarga el iframe para que no siga consumiendo CPU/GPU.
+  sceneM.addEventListener('close', () => sceneF.removeAttribute('src'));
+
+  // Foco en la escena para que funcionen las flechas del teclado.
+  sceneF.addEventListener('load', () => {
+    try { sceneF.contentWindow.focus(); } catch (_) {}
+  });
 }
-// clic en una foto: abre el visor en esa foto
-$$('[data-zoom]').forEach(b => b.addEventListener('click', () => {
-  const figs = [...b.closest('.shots').querySelectorAll('figure')];
-  openViewer(figs, figs.indexOf(b.closest('figure')));
-}));
-// botón "Ver fotos": abre el visor directamente en la primera foto
-$$('[data-gallery]').forEach(b => b.addEventListener('click', () => {
-  const figs = [...document.getElementById(b.dataset.gallery).querySelectorAll('.shots figure')];
-  if (figs.length) openViewer(figs, 0);
-}));
-lb.querySelector('.lb-prev').addEventListener('click', () => showShot(cur - 1));
-lb.querySelector('.lb-next').addEventListener('click', () => showShot(cur + 1));
-lb.querySelector('.lb-close').addEventListener('click', () => lb.close());
-lbImg.addEventListener('click', () => lbStage.classList.toggle('zoomed'));   // clic: tamaño real / ajustar
-lb.addEventListener('click', e => { if (e.target === lb || e.target === lbStage) lb.close(); });
-lb.addEventListener('keydown', e => {
-  if (e.key === 'ArrowLeft') showShot(cur - 1);
-  if (e.key === 'ArrowRight') showShot(cur + 1);
-});
