@@ -13,10 +13,13 @@ main{flex:1}
 .nav{position:fixed;inset:0 0 auto;z-index:20;background:var(--ink);border-bottom:1px solid rgba(255,255,255,.08)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:4rem}
 .brand{display:block;color:#fff;text-decoration:none;font:800 1.05rem "Bricolage Grotesque",sans-serif}
-.menu{display:flex;gap:.25rem;list-style:none}
+.menu{display:flex;gap:.25rem;list-style:none;margin-left:auto}
 .menu a{display:block;padding:.5rem .9rem;border-radius:99px;color:#C9D6E3;text-decoration:none;font-size:.95rem;font-weight:500;transition:background .2s,color .2s}
 .menu a:hover{background:rgba(255,255,255,.1);color:#fff}
 .menu .dl{background:var(--red);color:#fff}.menu .dl:hover{background:#b92b21}
+.lang{display:flex;margin-left:1rem;padding:3px;border-radius:99px;background:rgba(255,255,255,.1)}
+.lang button{border:0;background:none;color:#C9D6E3;font:600 .8rem "IBM Plex Sans",sans-serif;padding:.35rem .75rem;border-radius:99px;cursor:pointer;transition:background .2s,color .2s}
+.lang button[aria-pressed=true]{background:#fff;color:var(--ink)}
 .burger{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer;position:relative}
 .burger span{position:absolute;left:11px;right:11px;height:2px;background:#fff;transition:transform .25s}
 .burger span:first-child{top:17px}.burger span:last-child{top:25px}
@@ -57,15 +60,27 @@ h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;margin-bottom:2.5rem;max-w
 .social h3{padding-bottom:.25rem}
 
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:2rem}
-.card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;text-decoration:none;box-shadow:0 2px 6px rgba(15,30,46,.05);transition:transform .2s,border-color .2s,box-shadow .2s}
-.card:hover{transform:translateY(-4px);border-color:var(--ink);box-shadow:0 14px 30px rgba(15,30,46,.16)}
-.card:hover img{transform:scale(1.04)}
+.sec-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.25rem 2rem;margin-bottom:2.5rem}
+.sec-head h2{margin:0}
+.filters{display:flex;flex-wrap:wrap;gap:.5rem}
+.filters button{font:500 .95rem "IBM Plex Sans",sans-serif;padding:.5rem 1.1rem;border-radius:99px;border:1px solid var(--line);background:#fff;color:var(--text);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.filters button:hover{border-color:var(--ink)}
+.filters button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:1.75rem}
+.card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;transition:border-color .2s,box-shadow .2s}
+.card:hover{border-color:var(--ink);box-shadow:0 12px 28px rgba(15,30,46,.12)}
 .card[hidden]{display:none}
-.card img{aspect-ratio:16/10;width:100%;object-fit:contain;object-position:center;background:var(--paper);border-bottom:1px solid var(--line);transition:transform .4s}
-.card div{position:relative;z-index:1;background:#fff;padding:1.4rem 1.6rem 1.7rem}
-.card h4{font-size:1.25rem;margin-bottom:.4rem}
+.thumb{position:relative;background:var(--ink);border-bottom:1px solid var(--line)}
+.thumb img{aspect-ratio:16/10;width:100%;object-fit:contain;background:var(--paper)}
+.kind{position:absolute;left:.9rem;top:.9rem;padding:.25rem .7rem;border-radius:99px;background:var(--ink);color:#fff;font-size:.8rem;font-weight:500}
+.body{flex:1;display:flex;flex-direction:column;padding:1.4rem 1.5rem 1.3rem}
+.card h4{font-size:1.35rem;margin-bottom:.5rem}
 .card p{color:var(--muted);font-size:1rem}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;list-style:none;margin:1.1rem 0 1.4rem}
+.tags li{padding:.2rem .65rem;border-radius:6px;background:var(--paper);border:1px solid var(--line);font-size:.82rem;font-weight:500;color:var(--ink2)}
+.more{margin-top:auto;display:flex;align-items:center;gap:.55rem;padding-top:1rem;border-top:1px solid var(--line);font-weight:600;font-size:.95rem;color:var(--ink)}
+.more svg{width:1.2rem;height:1.2rem}
+.card:hover .more{color:var(--red)}
 
 .footer{background:#0A1520;color:#8FA2B5;padding:1.5rem 0;font-size:.9rem}
 
@@ -75,6 +90,7 @@ h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;margin-bottom:2.5rem;max-w
   .hero{padding:6.5rem 0 4rem}.section{padding:4rem 0}
   .hero-photo{width:15rem;margin-right:1.1rem;justify-self:start;order:-1}
   .burger{display:block}
+  .lang{margin-left:auto}.menu{margin-left:0}
   .menu{display:none;position:absolute;top:4rem;left:0;right:0;flex-direction:column;background:var(--ink);padding:.5rem 1.25rem 1rem}
   .menu.open{display:flex}
 }
