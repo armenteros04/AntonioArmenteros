@@ -71,6 +71,16 @@
       <h2 data-i18n="proj.title">Proyectos</h2>
     </div>
     <div class="grid">
+      <button type="button" class="card" data-open="m-tfg">
+        <div class="thumb"><img src="assets/imgs/tfgfin.png" alt="" loading="lazy"></div>
+        <div class="body">
+          <h4 data-i18n="tfg.t">Trabajo de Fin de Grado</h4>
+          <p data-i18n="tfg.d">Plataforma web basada en visión por computador para el análisis de vídeo en fútbol.</p>
+          <ul class="tags"><li>Python</li><li>YOLOv11</li></ul>
+          <span class="more"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span data-i18n="proj.more">Más información</span></span>
+          <small class="priv"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#lock"/></svg><span data-i18n="m.private">Código privado</span></small>
+        </div>
+      </button>
       <a class="card" data-c="graphics" href="https://github.com/armenteros04/A4Building-UJA" target="_blank" rel="noopener">
         <div class="thumb"><img src="assets/imgs/UJA.jfif" data-i18n-alt="p1.alt" alt="Edificio A4 de la UJA" loading="lazy"></div>
         <div class="body">
@@ -78,6 +88,7 @@
           <p data-i18n="p1.d">Recreación del edificio A4 de la Universidad de Jaén con OpenGL y C++.</p>
           <ul class="tags"><li>C++</li><li>OpenGL</li></ul>
           <span class="more"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#gh"/></svg><span data-i18n="proj.code">Ver código</span></span>
+          <small class="priv"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#unlock"/></svg><span data-i18n="proj.public">Código público</span></small>
         </div>
       </a>
       <a class="card" data-c="ai" href="https://github.com/armenteros04/Pacman-IA" target="_blank" rel="noopener">
@@ -85,17 +96,19 @@
         <div class="body">
           <h4>Pacman AI</h4>
           <p data-i18n="p2.d">Implementación de búsquedas y teoría de juegos.</p>
-          <ul class="tags"><li>Python</li><li>IA</li></ul>
+          <ul class="tags"><li>Python</li><li data-i18n="tag.ai">IA</li></ul>
           <span class="more"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#gh"/></svg><span data-i18n="proj.code">Ver código</span></span>
+          <small class="priv"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#unlock"/></svg><span data-i18n="proj.public">Código público</span></small>
         </div>
       </a>
       <a class="card" data-c="ai" href="https://github.com/armenteros04/ObjectDetection-Script" target="_blank" rel="noopener">
         <div class="thumb"><img src="assets/imgs/objectos.png" data-i18n-alt="p3.alt" alt="Detección de objetos" loading="lazy"></div>
         <div class="body">
-          <h4>Detección de objetos</h4>
+          <h4 data-i18n="p3.t">Detección de objetos</h4>
           <p data-i18n="p3.d">Detección a tiempo real en un sistema de tráfico.</p>
           <ul class="tags"><li>Python</li><li>YOLOv8</li><li>OpenCV</li></ul>
           <span class="more"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#gh"/></svg><span data-i18n="proj.code">Ver código</span></span>
+          <small class="priv"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#unlock"/></svg><span data-i18n="proj.public">Código público</span></small>
         </div>
       </a>
       <a class="card" data-c="web" href="https://github.com/armenteros04/TERCFIT-Webapp" target="_blank" rel="noopener">
@@ -103,8 +116,9 @@
         <div class="body">
           <h4>TERCFIT</h4>
           <p data-i18n="p4.d">Aplicación web para el bienestar personal.</p>
-          <ul class="tags"><li>Jakarta  EE</li><li>Java</li><li>SQL</li></ul>
+          <ul class="tags"><li>Jakarta EE</li><li>Java</li><li>SQL</li></ul>
           <span class="more"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#gh"/></svg><span data-i18n="proj.code">Ver código</span></span>
+          <small class="priv"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#unlock"/></svg><span data-i18n="proj.public">Código público</span></small>
         </div>
       </a>
     </div>
@@ -113,6 +127,103 @@
 
 </main>
 
+<dialog class="modal" id="m-tfg" aria-labelledby="m-tfg-t">
+  <div class="m-head">
+    <h3 id="m-tfg-t" data-i18n="tfg.t">Trabajo de Fin de Grado</h3>
+    <div class="m-actions">
+      <button type="button" class="m-jump" data-gallery="m-tfg" data-i18n-aria="m.viewphotos" aria-label="Ver fotos">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10.5" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg>
+        <span data-i18n="m.viewphotos">Ver fotos</span>
+      </button>
+      <button type="button" class="m-close" data-close data-i18n-aria="m.close" aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M6 6l12 12M18 6L6 18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="m-body">
+    <h4 class="m-first" data-i18n="m.about">Descripción</h4>
+
+    <div class="txt">
+      <p data-i18n="tfg.a1">Aplicación web que analiza automáticamente vídeos de partidos del Real Jaén CF. A partir de un clip, un pipeline de inteligencia artificial detecta y sigue a jugadores, porteros, árbitros y balón, asigna equipos y roles, proyecta a los jugadores sobre un minimapa del campo y calcula métricas.</p>
+
+      <p data-i18n="tfg.a2">Los resultados (vídeos anotados, mapas de calor, grafos, informes de jugador y estudio táctico) se consultan desde un panel web que además incluye el calendario de la temporada con sus estadísticas.</p>
+
+      <p data-i18n="tfg.a3">La aplicación se divide en tres piezas:</p>
+
+      <ul class="parts">
+        <li><b data-i18n="tfg.n1">Frontend</b>: <span data-i18n="tfg.u1">HTML y JavaScript. Es lo que ve el usuario.</span></li>
+        <li><b data-i18n="tfg.n2">Backend</b>: <span data-i18n="tfg.u2">Python (FastAPI). Expone una API REST y lanza los análisis.</span></li>
+        <li><b data-i18n="tfg.n3">Pipeline de IA</b>: <span data-i18n="tfg.u3">main.py. Hace el trabajo pesado sobre el vídeo.</span></li>
+      </ul>
+
+      <p data-i18n="tfg.a4">Los datos de temporada se guardan en una base de datos SQLite.</p>
+    </div>
+
+    <p class="priv">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#lock"/></svg>
+      <span data-i18n="m.private">Código privado</span>
+    </p>
+
+    <h4 id="m-tfg-shots" class="m-shots-t" data-i18n="m.shots">Capturas</h4>
+    <div class="shots">
+      <figure>
+        <button type="button" class="zoom" data-zoom data-i18n-aria="m.zoom" aria-label="Ampliar imagen">
+          <img src="assets/imgs/tfgmenu.png" data-i18n-alt="tfg.c1" alt="Menú principal" loading="lazy">
+        </button>
+        <figcaption data-i18n="tfg.c1">Menú principal</figcaption>
+      </figure>
+      <figure>
+        <button type="button" class="zoom" data-zoom data-i18n-aria="m.zoom" aria-label="Ampliar imagen">
+          <img src="assets/imgs/tfgfin.png" data-i18n-alt="tfg.c2" alt="Video final analizado" loading="lazy">
+        </button>
+        <figcaption data-i18n="tfg.c2">Video final analizado</figcaption>
+      </figure>
+      <figure>
+        <button type="button" class="zoom" data-zoom data-i18n-aria="m.zoom" aria-label="Ampliar imagen">
+          <img src="assets/imgs/tfgmapa.png" data-i18n-alt="tfg.c3" alt="Mapas de calor" loading="lazy">
+        </button>
+        <figcaption data-i18n="tfg.c3">Mapas de calor</figcaption>
+      </figure>
+      <figure>
+        <button type="button" class="zoom" data-zoom data-i18n-aria="m.zoom" aria-label="Ampliar imagen">
+          <img src="assets/imgs/tfggrafo.png" data-i18n-alt="tfg.c4" alt="Grafos de pases" loading="lazy">
+        </button>
+        <figcaption data-i18n="tfg.c4">Grafos de pases</figcaption>
+      </figure>
+      <figure>
+        <button type="button" class="zoom" data-zoom data-i18n-aria="m.zoom" aria-label="Ampliar imagen">
+          <img src="assets/imgs/tfgjugador.png" data-i18n-alt="tfg.c5" alt="Ficha de rendimiento" loading="lazy">
+        </button>
+        <figcaption data-i18n="tfg.c5">Ficha de rendimiento</figcaption>
+      </figure>
+      <figure>
+        <button type="button" class="zoom" data-zoom data-i18n-aria="m.zoom" aria-label="Ampliar imagen">
+          <img src="assets/imgs/tfgestudio.png" data-i18n-alt="tfg.c6" alt="Estudio estratégico" loading="lazy">
+        </button>
+        <figcaption data-i18n="tfg.c6">Estudio estratégico</figcaption>
+      </figure>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="lightbox" id="lb" data-i18n-aria="m.viewer" aria-label="Visor de imágenes">
+  <button type="button" class="lb-close" data-i18n-aria="m.close" aria-label="Cerrar">
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <button type="button" class="lb-nav lb-prev" data-i18n-aria="m.prev" aria-label="Anterior">
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+  </button>
+  <div class="lb-stage"><img id="lb-img" alt=""></div>
+  <button type="button" class="lb-nav lb-next" data-i18n-aria="m.next" aria-label="Siguiente">
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+  </button>
+  <p class="lb-cap" id="lb-cap"></p>
+</dialog>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="unlock" viewBox="0 0 24 24"><path fill="currentColor" d="M5 10h14v11H5z"/><path fill="none" stroke="currentColor" stroke-width="2" d="M8 10V8a4 4 0 0 1 7.5-2"/></symbol><symbol id="lock" viewBox="0 0 24 24"><path fill="currentColor" d="M6 10V8a6 6 0 1 1 12 0v2h1v11H5V10h1zm2 0h8V8a4 4 0 1 0-8 0v2z"/></symbol></svg>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="gh" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></symbol></svg>
 <footer class="footer"><div class="wrap">© <span id="y"></span> Antonio Armenteros</div></footer>
 <script src="assets/js/js.js"></script>
