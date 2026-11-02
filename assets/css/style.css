@@ -197,3 +197,8 @@ a.m-jump{text-decoration:none}
 #scene-tab {
     display: none !important;
 }
+
+/* Footer + aviso legal */
+.footer .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 1.5rem}
+.foot-link{background:none;border:0;padding:0;color:inherit;font:inherit;text-decoration:underline;cursor:pointer;transition:color .2s}
+.foot-link:hover{color:#fff}
